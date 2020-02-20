@@ -1,0 +1,2 @@
+include ':app', ':blink1'
+rootProject.name='Blink1Demo'
