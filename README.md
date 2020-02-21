@@ -6,6 +6,8 @@ This is a driver library for communication [blink(1) USB RGB LED notification li
 No root access, ADK, or special kernel drivers are required.
 The library is all in Java, using standard Android libraries.
 
+<img src="./docs/blink1demo.jpg" width="425">
+
 ## Quick Start
 
 **1.** Add library to your project:
