@@ -14,7 +14,7 @@ The library is all in Java, using standard Android libraries.
 
 
 **2.** If the app should be notified when a device is attached, add
-[device_filter.xml](https://github.com/mik3y/usb-serial-for-android/blob/master/usbSerialExamples/src/main/res/xml/device_filter.xml)
+[device_filter.xml](app/src/main/res/xml/device_filter.xml)
 to your project's `res/xml/` directory and configure in your `AndroidManifest.xml`.
 
 ```xml
