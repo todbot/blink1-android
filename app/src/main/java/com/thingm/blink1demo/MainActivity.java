@@ -1,4 +1,10 @@
+/*
+ * Copyright 2020 Tod E. Kurt / todbot.com
+ *
+ */
+
 package com.thingm.blink1demo;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -54,6 +60,7 @@ public class MainActivity extends AppCompatActivity
         if( blink1 != null ) {
             statusText.setText("blink(1) connected!");
             serialText.setText("serial:"+blink1.getSerialNumber()+", fw version:"+blink1.getVersion());
+            blink1.off();
             Log.d(TAG,"blink1 serial:"+ blink1.getSerialNumber());
         }
 
@@ -65,7 +72,7 @@ public class MainActivity extends AppCompatActivity
                 else if( seekBar == seekBarB ) { b = progress; }
                 Log.d(TAG, "onProgressChanged:"+progress+"  rgb:"+r+","+g+","+b);
                 if( blink1!=null ) {
-                    blink1.setColor((byte)r,(byte)g,(byte)b);
+                    blink1.setRGB(r, g, b);
                 }
             }
             @Override

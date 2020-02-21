@@ -1,3 +1,8 @@
+/*
+ * Copyright 2020 Tod E. Kurt / todbot.com
+ *
+ */
+
 package com.thingm.blink1;
 
 import android.content.Context;
@@ -28,16 +33,33 @@ public class Blink1  {
     }
 
     /**
-     * Set the color of the device with separate r, g and b byte values
+     * Fade blink(1) to RGB color over fadeMillis milliseconds.
      *
-     * @param r red byte color value 0..255
-     * @param g gree byte color value 0..255
-     * @param b blue byte color value 0..255
+     * @param fadeMillis milliseconds to take to get to color
+     * @param r          red component 0..255
+     * @param g          green component 0..255
+     * @param b          blue component 0..255
+     *
      */
-    public void setColor(byte r, byte g, byte b) {
+    public void fadeToRGB(int fadeMillis, int r, int g, int b ) {
+        this.fadeToRGB( fadeMillis, r,g,b, 0);
+    }
 
-        byte[] buffer =  { 0x01, 0x63, r, g, b, 0x00,0x20, 0x00,0x00};
-        Log.d("BLINK1", "sending buffer "+buffer[0] +","+ buffer[1] +","+ buffer[2] +","+ buffer[3]+","+ buffer[4]);
+    /**
+     * Fade blink(1) to RGB color over fadeMillis milliseconds.
+     *
+     * @param fadeMillis milliseconds to take to get to color
+     * @param r          red component 0..255
+     * @param g          green component 0..255
+     * @param b          blue component 0..255
+     * @param ledn       which LED to address (0=all)
+     *
+     */
+    public void fadeToRGB(int fadeMillis, int r, int g, int b, int ledn ) {
+        int dms = fadeMillis/10;
+
+        byte[] buffer =  { 0x01, 0x63, (byte)r, (byte)g, (byte)b, (byte)(dms >> 8), (byte)(dms % 0xff), (byte)ledn, 0x00};
+        Log.d("BLINK1", "fadeToRGB:"+buffer[0] +","+ buffer[1] +","+ buffer[2] +","+ buffer[3]+","+ buffer[4]);
         try {
             //                               reportId, buffer, length
             this.hidDevice.sendFeatureReport(buffer[0], buffer, buffer.length);
@@ -46,6 +68,31 @@ public class Blink1  {
         }
     }
 
+    /**
+     * Set the color of the device with separate r, g and b byte values
+     *
+     * @param r red byte color value 0..255
+     * @param g gree byte color value 0..255
+     * @param b blue byte color value 0..255
+     */
+    public void setRGB(int r, int g, int b) {
+
+        byte[] buffer =  { 0x01, (byte)'n', (byte)r, (byte)g, (byte)b, 0x00,0x01, 0x00,0x00};
+        Log.d("BLINK1", "setRGB:"+buffer[0] +","+ buffer[1] +","+ buffer[2] +","+ buffer[3]+","+ buffer[4]);
+        try {
+            //                               reportId, buffer, length
+            this.hidDevice.sendFeatureReport(buffer[0], buffer, buffer.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Turn blink(1) off
+     */
+    public void off() {
+        this.setRGB(0,0,0);
+    }
 
     /**
      * Return firmware version as number

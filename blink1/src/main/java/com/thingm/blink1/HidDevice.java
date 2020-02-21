@@ -10,7 +10,7 @@ import android.hardware.usb.UsbManager;
 
 import java.io.IOException;
 
-// HidDevice stolen from: https://stackoverflow.com/questions/8413260/android-usb-host-3-2-hid-report-get-set
+// HidDevice from: https://stackoverflow.com/questions/8413260/android-usb-host-3-2-hid-report-get-set
 
 public class HidDevice {
     /** GET_REPORT request code */

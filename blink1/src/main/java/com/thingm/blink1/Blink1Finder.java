@@ -1,6 +1,11 @@
+/*
+ * Copyright 2020 Tod E. Kurt / todbot.com
+ *
+ */
+
 package com.thingm.blink1;
 
-//import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
