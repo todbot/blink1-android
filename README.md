@@ -1,7 +1,7 @@
 # blink1-android
 
 
-This is a driver library for communication [blink(1) USB RGB LED notification lights](https://blink1.thingm.com/), using the [Android USB Host Mode (OTG)](http://developer.android.com/guide/topics/connectivity/usb/host.html) available since Android 3.1 and working reliably since Android 4.2.
+This is a driver library for communication with [blink(1) USB RGB LED notification lights](https://blink1.thingm.com/), using the [Android USB Host Mode (OTG)](http://developer.android.com/guide/topics/connectivity/usb/host.html), available since Android 3.1 and working reliably since Android 4.2.
 
 No root access, ADK, or special kernel drivers are required.
 The library is all in Java, using standard Android libraries.
