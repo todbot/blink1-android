@@ -10,14 +10,22 @@ import java.util.Arrays;
 public class Blink1  {
 
     private HidDevice hidDevice;
+    private UsbDevice usbDevice;
 
 
     public Blink1(Context context, UsbDevice device) throws IOException {
 
+        this.usbDevice = device;
         this.hidDevice = new HidDevice(context,device);
     }
 
-
+    /**
+     * Return blink(1) serial number string
+     * @return String of 8 hex digits as serial number
+     */
+    public String getSerialNumber() {
+        return this.usbDevice.getSerialNumber();
+    }
 
     /**
      * Set the color of the device with separate r, g and b byte values
@@ -39,12 +47,21 @@ public class Blink1  {
     }
 
 
+    /**
+     * Return firmware version as number
+     * e.g. v302 firmware is returned as in "302"
+     * @return number representing firmware version or zero on error
+     */
     public int getVersion() {
         byte [] buffer = { 1, 'v', 0,0,0,0,0,0,0 };
         try {
             this.hidDevice.sendFeatureReport(buffer[0], buffer, buffer.length);
             this.hidDevice.getFeatureReport(buffer[0], buffer, buffer.length);
             Log.d("BLINK1", "getVersion:"+Arrays.toString((buffer)));
+            int vh = Character.getNumericValue(buffer[3]);
+            int vl = Character.getNumericValue(buffer[4]);
+            int ver = (vh*100) + vl;
+            return ver;
         } catch( Exception e ) {
             e.printStackTrace();
         }

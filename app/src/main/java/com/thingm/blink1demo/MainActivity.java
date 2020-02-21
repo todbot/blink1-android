@@ -15,7 +15,6 @@ import com.thingm.blink1.Blink1Finder;
 public class MainActivity extends AppCompatActivity
 
 {
-
     private static final String TAG = "BLINK1DEMO";
     private static final String ACTION_USB_PERMISSION = "com.thingm.blink1demo.action.USB_PERMISSION";
     private PendingIntent permissionIntent;
@@ -26,6 +25,7 @@ public class MainActivity extends AppCompatActivity
     SeekBar seekBarG;
     SeekBar seekBarB;
     TextView statusText;
+    TextView serialText;
 
     int r = 0;
     int g = 0;
@@ -39,7 +39,9 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         statusText=(TextView) findViewById(R.id.statusText);
+        serialText=(TextView) findViewById(R.id.serialText);
         statusText.setText("looking for blink(1)");
+        serialText.setText(" ");
 
         permissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
         blink1Finder = new Blink1Finder();
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity
 
         if( blink1 != null ) {
             statusText.setText("blink(1) connected!");
+            serialText.setText("serial:"+blink1.getSerialNumber()+", fw version:"+blink1.getVersion());
+            Log.d(TAG,"blink1 serial:"+ blink1.getSerialNumber());
         }
 
         seekbarChange =  new SeekBar.OnSeekBarChangeListener() {
@@ -59,9 +63,10 @@ public class MainActivity extends AppCompatActivity
                 if(      seekBar == seekBarR ) { r = progress; }
                 else if( seekBar == seekBarG ) { g = progress; }
                 else if( seekBar == seekBarB ) { b = progress; }
-                Log.d(TAG, "onProgressChanged:"+progress+"rgb:"+r+","+g+","+b);
-                blink1.setColor((byte)r,(byte)g,(byte)b);
-//                Toast.makeText(getApplicationContext(),"seekbar progress: "+progress, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onProgressChanged:"+progress+"  rgb:"+r+","+g+","+b);
+                if( blink1!=null ) {
+                    blink1.setColor((byte)r,(byte)g,(byte)b);
+                }
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) { }
