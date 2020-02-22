@@ -62,7 +62,7 @@ blink1Finder.setPermissionIntent(permissionIntent);
 Blink1 blink1 = blink1Finder.openFirst();     
 ```
 
-then use [Blink1](src/main/java/com/thingm/blink1/Blink1.java) API to control the blink(1):
+then use [Blink1](blink/src/main/java/com/thingm/blink1/Blink1.java) API to control the blink(1):
 
 ```java
   int r = 255;
