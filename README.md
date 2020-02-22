@@ -30,7 +30,7 @@ You can clone the library as a git submodule or download full source code.
 * Set as dependency via "File -> Project Structure... -> Dependencies -> '+' -> Module Dependency"
 
 **2.** If the app should be notified when a device is attached, add
-[device_filter.xml](app/src/main/res/xml/device_filter.xml)
+[device_filter.xml](blink1/app/src/main/res/xml/device_filter.xml)
 to your project's `res/xml/` directory and configure in your `AndroidManifest.xml`.
 
 ```xml
@@ -50,7 +50,7 @@ to your project's `res/xml/` directory and configure in your `AndroidManifest.xm
 
 Example code snippet:
 
-Open blink(1) device using [Blink1Finder](src/main/java/com/thingm/blink1/Blink1Finder.java):
+Open blink(1) device using [Blink1Finder](blink1/src/main/java/com/thingm/blink1/Blink1Finder.java):
 ```java
 private static final String ACTION_USB_PERMISSION = "com.thingm.blink1demo.action.USB_PERMISSION";
 PendingIntent permissionIntent = PendingIntent.getBroadcast(this, 0, new Intent(ACTION_USB_PERMISSION), 0);
