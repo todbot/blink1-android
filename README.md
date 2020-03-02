@@ -9,7 +9,7 @@ The library is 100% Java, using standard Android libraries.
 <img src="./docs/blink1demo.jpg" width="425">
 
 ## Hardware requirements
-To use a blink(1) device with Android device you will need:
+To use a blink(1) USB light with an Android device, you will need:
 
 * Device running Android 4.2 or later
 * Device must support USB OTG (check with [this app](http://bit.ly/2upSUOG))
